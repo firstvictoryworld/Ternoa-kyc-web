@@ -1,0 +1,28 @@
+.merci{
+	position: relative;
+	.sign-in-row {
+		margin: 0;
+		padding: 0;
+		.sign-in-btn-merci {
+			@include submit-btn();
+			width: 100%;
+			background: -webkit-linear-gradient(
+				90deg
+				, #F29FFF 0%, #878CFF 100%);
+			-webkit-background-clip: text;
+			-webkit-text-fill-color: #878cff;
+		}
+	}
+	.continue-my-kyc {
+		padding: 15px 40px;
+	    border-radius: 49px;
+	    font-weight: bold;
+	    font-size: 20px;
+	    border: 4px solid #878CFF;
+	    -webkit-text-fill-color: #F29FFF;
+	    cursor: pointer;
+	    -webkit-background-clip: text;
+	    margin-bottom: 30px;
+	    width: 100%;
+	}
+}

@@ -1,0 +1,306 @@
+.react-responsive-modal-modal {
+	border-radius: 20px;
+    background: #ffffff;
+    // width: 426px;
+    // height: 426px;
+    max-width: 100%;
+    @include respond-at-max(540px){
+    	width: auto;
+    	height: auto;
+    }
+    // @include respond-at-max(480px){
+    // 	width: auto;
+    // 	height: auto;
+    // }
+    // @include respond-at-max(414px){
+    // 	width: auto;
+    // 	height: auto;
+    // }
+	.outh-modal-wrapper {
+		padding: 40px 0px 20px;
+		text-align: center;
+		@include respond-at-max(375px){
+			padding: 40px 0px 20px;
+		}
+		.popup{
+			h3{
+			font-style: normal;
+		    font-weight: bold;
+		    font-size: 30px;
+		    line-height: 37px;
+		    text-align: center;
+		    color: #000000;
+			}
+			p{
+			font-style: normal;
+			font-weight: normal;
+			font-size: 16px;
+			line-height: 20px;
+			text-align: center;
+			color: #000000;
+			}
+		}
+		.main-logout{
+			display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    padding-top: 30px;
+		    @include respond-at-max(540px){
+				display: inline-block;
+				width: 100%;
+			}
+		    p{
+		    	margin-bottom: 0px;
+		    	text-align: left;
+		    	font-style: normal;
+				font-weight: normal;
+				font-size: 16px;
+				line-height: 20px;
+				color: #000000;
+		    }
+		    .check-kyc-1{
+		    	margin-top: 0px;
+		    	text-align: right;
+		    	@include respond-at-max(540px){
+				    text-align: left;
+				}
+		    	a{
+		    		font-style: normal;
+				    font-weight: normal;
+				    font-size: 16px;
+				    line-height: 20px;
+				    text-align: left;
+				    color: #000000;
+				    text-decoration: underline;
+				    outline: none;
+				    @include respond-at-max(414px){
+				    	font-size: 15px;
+				    }
+				    @include respond-at-max(375px){
+				    	font-size: 13px;
+				    }
+				    @include respond-at-max(360px){
+				    	font-size: 12px;
+				    }
+		    	}
+		    }
+		}
+		.main-logout-2{
+			display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    padding-top: 30px;
+		    width: 100%;
+			@include respond-at-max(540px){
+				display: block;
+			}	
+			.field-item-1{
+		    	width: 100%;
+			    height: 37px;
+			    background: #FFFFFF;
+			    box-sizing: border-box;
+			    border-radius: 6px;
+			    margin-bottom: 6px;
+			    margin-top: 6px;
+			    input{
+			    	width: 237px;
+				    height: 37px;
+				    background: #FFFFFF;
+				    box-sizing: border-box;
+				    border-radius: 6px;
+				    background: #FFFFFF;
+					border: 1px solid rgba(30, 52, 169, 0.3);
+					box-sizing: border-box;
+					border-radius: 6px;
+					padding-left: 12px;
+				    @include respond-at-max(540px){
+				    	width: 100%;
+				    }
+			    }
+		    }
+		    .confirm-btn{
+		    	width: 108px;
+				height: 37px;
+				border-radius: 6px;
+				@include respond-at-max(540px){
+				    width: auto;
+				}
+				.verify-btn-1{
+					font-style: normal;
+				    font-weight: 500;
+				    font-size: 14px;
+				    line-height: 92.9%;
+				    color: #FFFFFF;
+				    width: 108px;
+				    height: 37px;
+				    background: #D622FF;
+				    border-radius: 6px;
+				    border: none;
+				    padding: 5px;
+				    @include respond-at-max(540px){
+					    width: 100%;
+					}
+				}
+		    }
+		}
+		.main-logout-1{
+			display: flex;
+		    align-items: flex-start;
+		    justify-content: flex-start;
+		    p{
+		    	width: 60%;
+			    text-align: left;
+			    margin-left: 15px;
+			    font-style: normal;
+				font-weight: 500;
+				font-size: 10px;
+				line-height: 159.9%;
+				color: #969696;
+				@include respond-at-max(414px){
+					width: 100%;
+					margin-top: 10px;
+					margin-left: 18px;
+		    	}
+		    }
+		}
+		.logout-btn-main {
+			background-image: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+            border-image-slice: 1;
+            border-radius: 49px;
+            display: flex;
+            height: 64px;
+            justify-content: center;
+            align-items: center;
+            width: 198px;
+            margin: auto;
+            margin-top: 100px;
+            .logout-btn-child{
+            	background-color: #ffffff;
+            	height: 58px;
+            	border-radius: 49px;
+            	width: 192px;
+            	cursor: pointer;
+            	.logout-button{
+            		background: -webkit-linear-gradient(90deg, #F29FFF 0%, #878CFF 100%);
+            		-webkit-background-clip: text;
+                    -webkit-text-fill-color: #878cff;
+                    flex-grow: 1;
+                    border: none;
+                    height: 58px;
+                    width: 100%;
+				    font-style: normal;
+				    font-weight: bold;
+				    font-size: 20px;
+				    line-height: 24px;
+				    text-align: center;
+				    justify-content: center;
+				    align-items: center;
+				    display: flex;
+            	}
+            }
+		}
+	    .field-item {
+	    	width: 235px;
+    		height: 62px;
+    		margin: auto;
+    		margin-top: 50px;
+    		margin-bottom: 45px;
+	    	input {
+				@include input-field();
+				background: #FFFFFF;
+			    border: 1px solid rgba(30, 52, 169, 0.3);
+			    box-sizing: border-box;
+			    border-radius: 6px;
+			    width: 235px;
+			    height: 62px;
+			    font-style: normal;
+			    font-weight: normal;
+			    font-size: 24px;
+			    line-height: 159.9%;
+			    text-align: center;
+			    color: #000000;
+
+			}
+	    }
+	    .email-field-item {
+	    	width: 100%;
+    		height: 62px;
+    		margin: auto;
+    		margin-top: 50px;
+    		margin-bottom: 45px;
+	    	.email-field {
+				width: 100%;
+			}
+	    }
+	    button:disabled,
+		button[disabled]{
+			display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    width: auto;
+		    height: 64px;
+		    background: linear-gradient(90.55deg, rgba(245, 150, 208, 0.2) 0.25%, rgba(214, 34, 255, 0.2) 100.45%);
+			border-radius: 44px;
+		    padding: 20px 40px;
+		    margin: auto;
+		    font-style: normal;
+		    font-weight: bold;
+		    font-size: 20px;
+		    line-height: 24px;
+		    text-align: center;
+		    color: rgba(255, 255, 255, 0.4);
+		    border: none;
+		    box-shadow: none;
+    		cursor: default;
+		}
+	    .verify-btn {
+	    	display: flex;
+		    align-items: center;
+		    justify-content: center;
+		    width: 164px;
+		    height: 64px;
+		    background: linear-gradient(90.55deg, #F596D0 0.25%, #D622FF 100.45%);
+		    box-shadow: 0px 10px 20px rgb(214 34 255 / 32%);
+		    border-radius: 44px;
+		    padding: 20px 40px;
+		    margin: auto;
+		    font-style: normal;
+		    font-weight: bold;
+		    font-size: 20px;
+		    line-height: 24px;
+		    text-align: center;
+		    color: #FFFFFF;
+		    border: none;
+		    cursor: pointer;
+	    }
+	    .logout-btn {
+	    	margin-top: 10px;
+	    	min-width: 258px;
+	    }
+	    .check-kyc{
+		    margin-top: 12px;
+		    a{
+		    	font-style: normal;
+			    font-weight: normal;
+			    font-size: 16px;
+			    line-height: 20px;
+			    text-align: center;
+			    color: #000000;
+		    }
+	    }
+	    .check-kyc-1{
+		    margin-top: 12px;
+		    a{
+		    	font-style: normal;
+			    font-weight: bold;
+			    font-size: 20px;
+			    line-height: 20px;
+			    text-align: center;
+			    color: #f491d2;
+		    }
+	    }
+	}
+	// &.header-modal {
+	// 	height: 50px;	
+	// }
+}

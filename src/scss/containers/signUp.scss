@@ -1,0 +1,228 @@
+.sign-up-wrapper {
+	position: relative;
+	.sign-up-row {
+		margin: 0;
+		padding: 0;
+
+		.left-box {
+			margin: 0;
+			padding: 0;
+			background: $light_blue;
+			/*height: 100%;*/
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding-top: 60px;
+			padding-bottom: 60px;
+			@include respond-at-max(540px) {
+				padding: 0px 20px;
+				min-height: 90vh;
+			}
+		}
+
+		.sign-up-form {
+			margin: 0;
+			padding: 0;
+			background: $dark_blue;
+			/*height: 100%;*/
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			padding-top: 60px;
+			padding-bottom: 60px;
+			@include respond-at-max(540px) {
+				padding: 85px 20px;
+				min-height: 90vh;
+			}
+			@include respond-at-max(414px) {
+				padding: 85px 20px;
+				min-height: 100vh;
+			}
+			.form-wrapper {
+				@include respond-at-max(480px) {
+					padding: 0px 15px;
+				}
+				@include respond-at-max(375px) {
+					padding: 50px 15px 50px;
+				}
+				width: 100%;
+				max-width: 532px;
+				margin: 0 auto;
+				/*background: white;*/
+
+				.title {
+					font-style: normal;
+					font-weight: bold;
+					font-size: 24px;
+					line-height: 29px;
+					color: #FFFFFF;
+				}
+				.fields-wrapper {
+					margin: 20px 0px 50px 0px;
+
+					.field-item {
+						margin: 15px 0;
+						background-image: linear-gradient( 
+					90deg
+					 , #004FFF 0%, #CB06ED 33.3%, #FF0062 65.56%, #FF8500 99.9%);
+					    border-radius: 40px;
+					    height: 61px;
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+						input {
+							@include input-field();
+						}
+						input {
+							border-color: transparent;
+						    height: 57px;
+						    border-radius: 40px;
+						    width: calc(100% - 4px);
+						    margin: auto;
+						    display: flex;
+						    align-items: center;
+						    justify-content: center;
+						}
+
+						.error {
+							color: yellow;
+							font-size: 12px;	
+						}
+					}
+					.field-item-1{
+						margin: 15px 0;
+						background-image: linear-gradient( 
+					90deg
+					 , #004FFF 0%, #CB06ED 33.3%, #FF0062 65.56%, #FF8500 99.9%);
+					    border-radius: 40px;
+					    height: 61px;
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+					    .PhoneInput{
+					    	margin-right: 2px;
+						    display: flex;
+						    align-items: center;
+						    width: 100%;
+						    margin-left: 2px;
+						    .PhoneInputCountry{
+						    	position: absolute;
+							    margin-left: 14px;
+							    margin-top: 22px;
+							    margin-bottom: 22px;
+						    }
+					    }	
+					    input {
+							@include input-field();
+						}
+						input {
+							border-color: transparent;
+						    height: 57px;
+						    border-radius: 40px;
+						    width: calc(100% - 4px);
+						    margin: auto;
+						    display: flex;
+						    align-items: center;
+						    justify-content: center;
+						    padding-left: 52px;
+						}
+					}
+					.error {
+						color: yellow;
+						font-size: 12px;	
+					}
+					.radion-btns {
+						display: flex;
+						flex-direction: row;
+						align-items: center;
+						flex-wrap: wrap;
+						margin: 15px 0px;
+						@include respond-at-max(540px) {
+							display: block;
+						    width: 100%;
+						    text-align: left;
+						}
+
+						.cgu, .saft {
+							display: flex;
+							flex-direction: row;
+							align-items: center;
+							img {
+								width: 28px;
+								cursor: pointer;
+							}
+							.label {
+								font-weight: bold;
+								font-size: 12px;
+								line-height: 15px;
+								text-decoration-line: underline;
+								// color: $gray;
+								color: white;
+								margin-left: 10px;
+								cursor: pointer;
+
+								a {
+									text-decoration: none;
+									color: white;
+								}
+								a:hover {
+									color: lightblue;
+								}
+							}
+						}
+						.saft {
+							margin-left: 25px;
+							@include respond-at-max(540px) {
+								margin-left: 0px;
+								margin-top: 10px;
+							}
+
+						}
+					}
+				}
+				.sign-up-btn {
+					@include respond-at-max(320px) {
+						padding: 16px 30px;
+					}
+					@include submit-btn()
+				}
+				.sign-up-btn-main {
+				    background-image: linear-gradient(
+				180deg
+				, #F29FFF 0%, #878CFF 100%);
+				    border-image-slice: 1;
+				    border-radius: 49px;
+				    display: flex;
+				    width: 287px;
+				    height: 64px;
+				    justify-content: center;
+				    align-items: center;
+				    @include respond-at-max(320px) {
+						width: auto;
+					}
+				    .sign-up-btn-child {
+					    background-color: #05043e;
+					    width: calc(100% - 8px);
+					    height: 58px;
+					    border-radius: 49px;
+					    .sign-up-btn {
+						    background: -webkit-linear-gradient(
+						90deg
+						, #F29FFF 0%, #878CFF 100%);
+						    -webkit-background-clip: text;
+						    -webkit-text-fill-color: transparent;
+						    flex-grow: 1;
+						    border: none;
+						    height: 58px;
+						}
+					}
+				}
+			}
+		}
+	}
+	
+}

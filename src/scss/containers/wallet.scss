@@ -1,0 +1,26 @@
+.wallet-wrapper {
+	.wallet-button {
+		line-height: inherit;
+		min-width: 316px;
+		padding: 16px 10px;
+		@include respond-at-max(320px){
+			min-width: auto;
+    		font-size: 18px;
+		}
+	}
+
+	.contents{
+		padding-top: 100px;
+		@include respond-at-max(414px){
+			padding: 100px 15px 100px;
+		}
+		@include respond-at-max(375px){
+			padding: 150px 15px 100px;
+		}
+		.contain{
+			display: flex;
+    		flex-direction: column;
+    		width: auto
+		}
+	}
+}

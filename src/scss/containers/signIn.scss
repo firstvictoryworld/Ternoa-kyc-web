@@ -1,0 +1,147 @@
+.sign-in-wrapper {
+	position: relative;
+	.sign-in-row {
+		margin: 0;
+		padding: 0;
+
+		.left-box {
+			margin: 0;
+			padding: 0;
+			background: $light_blue;
+			height: 100%;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+			@include respond-at-max(540px) {
+				padding: 0px 20px;
+				min-height: 90vh;
+			}
+		}
+
+		.sign-in-form {
+			margin: 0;
+			padding: 0;
+			background: $dark_blue;
+			min-height: 100vh;
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			justify-content: center;
+
+			.form-wrapper {
+				@include respond-at-max(540px) {
+					padding: 85px 20px;
+				}
+				@include respond-at-max(480px) {
+					padding: 0px 15px;
+				}
+				@include respond-at-max(375px) {
+					padding: 50px 15px 50px;
+				}
+				@include respond-at-max(375px) {
+					padding: 90px 15px 50px;
+				}
+				width: 100%;
+				max-width: 532px;
+				margin: 0 auto;
+				/*background: white;*/
+
+				.title {
+					// font-family: 'MontserratExtraBold';
+					// font-weight: bold;
+					font-style: normal;
+					font-weight: bold;
+					font-size: 24px;
+					line-height: 29px;
+					color: #FFFFFF;
+
+				}
+				.fields-wrapper {
+					margin: 20px 0px 50px 0px;
+
+					.field-item {
+						margin: 15px 0;
+						background-image: linear-gradient( 
+					90deg
+					 , #004FFF 0%, #CB06ED 33.3%, #FF0062 65.56%, #FF8500 99.9%);
+					    border-radius: 40px;
+					    height: 61px;
+					    display: flex;
+					    justify-content: center;
+					    align-items: center;
+						input {
+							@include input-field();
+						}
+						input {
+							border-color: transparent;
+						    height: 57px;
+						    border-radius: 40px;
+						    width: calc(100% - 4px);
+						    margin: auto;
+						    display: flex;
+						    align-items: center;
+						    justify-content: center;
+						}
+
+						.error {
+							color: yellow;
+							font-size: 12px;	
+						}
+					}
+					.error {
+						color: yellow;
+						font-size: 12px;	
+					}
+				}
+				.sign-in-btn {
+					@include submit-btn()
+				}
+				.sign-in-btn {
+					border:none;
+					width: 100%;
+					background: -webkit-linear-gradient(
+						90deg
+						, #F29FFF 0%, #878CFF 100%);
+					-webkit-background-clip: text;
+					-webkit-text-fill-color: transparent;
+					flex-grow: 1;
+				}
+				.sign-up-btn-main {
+				    background-image: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+				    border-image-slice: 1;
+				    border-radius: 49px;
+				    display: flex;
+				    height: 64px;
+				    justify-content: center;
+				    align-items: center;
+				    .sign-up-btn-child {
+					    background-color: #05043e;
+					    width: calc(100% - 8px);
+					    height: 58px;
+					    border-radius: 49px;
+					    .sign-up-btn {
+						    background: -webkit-linear-gradient(
+						90deg
+						, #F29FFF 0%, #878CFF 100%);
+						    -webkit-background-clip: text;
+						    -webkit-text-fill-color: transparent;
+						    flex-grow: 1;
+						    border: none;
+						    height: 58px;
+						    width: 100%;
+						}
+					}
+				}
+			}
+		}
+	}
+
+	.forgot-password-text {
+		text-align: center;
+	    color: white;
+	    cursor: pointer;
+	    padding: 20px;
+	}
+}

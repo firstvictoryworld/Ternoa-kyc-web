@@ -1,0 +1,87 @@
+/* General 
+--------------------------------------------------------------*/
+@font-face {
+    font-family: 'Montserrat';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Montserrat'), url('assets/Montserrat/Montserrat-Black.tff') format('tff');
+}
+
+
+@font-face {
+    font-family: 'MontserratBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('MontserratBold'), url('assets/Montserrat/Montserrat-Bold.tff') format('tff');
+}
+
+
+@font-face {
+    font-family: 'MontserratExtraBold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('MontserratExtraBold'), url('assets/Montserrat/Montserrat-ExtraBold.tff') format('tff');
+}
+
+
+@font-face {
+    font-family: 'Airbnb Cereal App Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Bold'), url('assets/font/AirbnbCerealBold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Airbnb Cereal App Extra Bold';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Extra Bold'), url('assets/font/AirbnbCerealExtraBold.woff') format('woff');
+}
+
+
+@font-face {
+    font-family: 'Airbnb Cereal App Black';
+    font-style: normal;
+    font-weight: normal;
+    src: local('Airbnb Cereal App Black'), url('assets/font/AirbnbCerealBlack.woff') format('woff');
+}
+
+.App {
+  text-align: center;
+}
+
+.App-logo {
+  height: 40vmin;
+  pointer-events: none;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .App-logo {
+    animation: App-logo-spin infinite 20s linear;
+  }
+}
+
+.App-header {
+  background-color: #282c34;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  font-size: calc(10px + 2vmin);
+  color: white;
+}
+
+.App-link {
+  color: #61dafb;
+}
+
+@keyframes App-logo-spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}

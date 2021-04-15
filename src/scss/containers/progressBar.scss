@@ -1,0 +1,391 @@
+.nft_wallet_wrapper {
+	.count-progress-wrapper{
+	    // background: #05043E;
+	    // height: 100%;
+	    // min-height: 100vh;
+	    .row{
+	    	// margin-left: 15px;
+	    	// margin-right: 15px;
+	    	padding: 50px 0px;
+	    }
+	    .count-progress-1{
+	    	.row{
+	    		margin: 0px;
+	    		padding: 0px;
+	    	}
+	    	height: 313px;
+		    width: 287px;
+		    background: linear-gradient(180deg, #1E34A9 0%, #131062 100%);
+		    box-shadow: 0px 10px 20px rgb(0 0 0 / 25%);
+		    border-radius: 20px;
+		    padding: 20px;
+		    img{
+		    	width: 26px;
+		    	height: 26px;
+		    }
+		    .count-step{
+		    	p{
+		    		background: rgba(255, 255, 255, 0.1);
+				    border-radius: 20px;
+				    width: 70px;
+				    height: 25px;
+				    float: right;
+				    font-style: normal;
+				    font-weight: normal;
+				    font-size: 12px;
+				    line-height: 15px;
+				    text-align: center;
+				    text-transform: uppercase;
+				    color: #FFFFFF;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+		    	}
+		    }
+		    .RCP {
+			    margin: auto;
+			    height: 180px;
+			    .RCP__progress{
+			    	border: 20px solid;
+					border-image-source: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+			    }
+			    
+			}
+			.progress-text{
+				display: grid;
+    			margin-top: -100px;
+				p{
+					font-style: normal;
+				    font-weight: 500;
+				    font-size: 23px;
+				    line-height: 28px;
+				    text-align: center;
+				    color: #FFFFFF;
+				    margin-bottom: 5px;
+				}
+				span{
+					font-style: normal;
+					font-weight: normal;
+					font-size: 12px;
+					line-height: 15px;
+					text-align: center;
+					color: rgba(255, 255, 255, 0.5);
+				}
+			}
+	    }
+	    .first-text{
+			    font-style: normal;
+				font-weight: normal;
+				font-size: 12px;
+				line-height: 15px;
+				text-align: center;
+				color: #FFFFFF;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: 12px;
+				margin-top: 50px;
+				@include respond-at-max(800px) {
+                    text-align: left !important;
+				    display: flex !important;
+				    align-items: flex-start !important;
+				    justify-content: left !important;
+				    margin-left: 44px !important;
+                } 
+			}
+		.second-text{
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 20px;
+			margin-top: 50px;
+			@include respond-at-max(800px) {
+                text-align: right !important;
+			    display: flex !important;
+			    align-items: flex-end !important; 
+			    justify-content: flex-end !important;
+			    margin-right: 37px !important;
+    			margin-top: -14px !important;
+            } 
+		}
+	    .count-progress-2{
+	    	.row{
+	    		margin: 0px;
+	    		padding: 0px;
+	    	}
+	    	height: 313px;
+		    width: 287px;
+		    background: linear-gradient(180deg, #0F6450 0%, #021213 100%);
+			box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+			border-radius: 20px;
+			padding: 20px;
+			img{
+		    	width: 26px;
+		    	height: 26px;
+		    }
+		    .count-step{
+		    	p{
+		    		background: rgba(255, 255, 255, 0.1);
+				    border-radius: 20px;
+				    width: 70px;
+				    height: 25px;
+				    float: right;
+				    font-style: normal;
+				    font-weight: normal;
+				    font-size: 12px;
+				    line-height: 15px;
+				    text-align: center;
+				    text-transform: uppercase;
+				    color: #FFFFFF;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+		    	}
+		    }
+		    .RCP {
+			    margin: auto;
+			    height: 180px;
+			    .RCP__progress{
+			    	border: 20px solid;
+					border-image-source: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+			    }
+			    
+			}
+			.progress-text{
+				display: grid;
+    			margin-top: -100px;
+				p{
+					font-style: normal;
+				    font-weight: 500;
+				    font-size: 23px;
+				    line-height: 28px;
+				    text-align: center;
+				    color: #FFFFFF;
+				    margin-bottom: 5px;
+				}
+				span{
+					font-style: normal;
+					font-weight: normal;
+					font-size: 12px;
+					line-height: 15px;
+					text-align: center;
+					color: rgba(255, 255, 255, 0.5);
+				}
+			}
+	    }
+	    .first-text{
+			    font-style: normal;
+				font-weight: normal;
+				font-size: 12px;
+				line-height: 15px;
+				text-align: center;
+				color: #FFFFFF;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: 12px;
+				margin-top: 50px;
+			}
+		.second-text{
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 20px;
+			margin-top: 50px;
+		}
+	    .count-progress-3{
+	    	.row{
+	    		margin: 0px;
+	    		padding: 0px;
+	    	}
+	    	height: 313px;
+		    width: 287px;
+		    background: linear-gradient(180deg, #781987 0%, #220529 100%);
+			box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+		    border-radius: 20px;
+		    padding: 20px;
+		    img{
+		    	width: 26px;
+		    	height: 26px;
+		    }
+		    .count-step{
+		    	p{
+		    		background: rgba(255, 255, 255, 0.1);
+				    border-radius: 20px;
+				    width: 70px;
+				    height: 25px;
+				    float: right;
+				    font-style: normal;
+				    font-weight: normal;
+				    font-size: 12px;
+				    line-height: 15px;
+				    text-align: center;
+				    text-transform: uppercase;
+				    color: #FFFFFF;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+		    	}
+		    }
+		    .RCP {
+			    margin: auto;
+			    height: 180px;
+			    .RCP__progress{
+			    	border: 20px solid;
+					border-image-source: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+			    }
+			    
+			}
+			.progress-text{
+				display: grid;
+    			margin-top: -100px;
+				p{
+					font-style: normal;
+				    font-weight: 500;
+				    font-size: 23px;
+				    line-height: 28px;
+				    text-align: center;
+				    color: #FFFFFF;
+				    margin-bottom: 5px;
+				}
+				span{
+					font-style: normal;
+					font-weight: normal;
+					font-size: 12px;
+					line-height: 15px;
+					text-align: center;
+					color: rgba(255, 255, 255, 0.5);
+				}
+			}
+	    }
+	    .first-text{
+			    font-style: normal;
+				font-weight: normal;
+				font-size: 12px;
+				line-height: 15px;
+				text-align: center;
+				color: #FFFFFF;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: 12px;
+				margin-top: 50px;
+			}
+		.second-text{
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 20px;
+			margin-top: 50px;
+		}
+	    .count-progress-4{
+	    	.row{
+	    		margin: 0px;
+	    		padding: 0px;
+	    	}
+	    	height: 313px;
+		    width: 287px;
+		    background: linear-gradient(180deg, #00093C 0%, #000000 100%);
+			box-shadow: 0px 10px 20px rgba(0, 0, 0, 0.25);
+		    border-radius: 20px;
+		    padding: 20px;
+		    img{
+		    	width: 26px;
+		    	height: 26px;
+		    }
+		    .count-step{
+		    	p{
+		    		background: rgba(255, 255, 255, 0.1);
+				    border-radius: 20px;
+				    width: 70px;
+				    height: 25px;
+				    float: right;
+				    font-style: normal;
+				    font-weight: normal;
+				    font-size: 12px;
+				    line-height: 15px;
+				    text-align: center;
+				    text-transform: uppercase;
+				    color: #FFFFFF;
+				    display: flex;
+				    align-items: center;
+				    justify-content: center;
+		    	}
+		    }
+		    .RCP {
+			    margin: auto;
+			    height: 180px;
+			    .RCP__progress{
+			    	border: 20px solid;
+					border-image-source: linear-gradient(180deg, #F29FFF 0%, #878CFF 100%);
+			    }
+			    
+			}
+			.progress-text{
+				display: grid;
+    			margin-top: -100px;
+				p{
+					font-style: normal;
+				    font-weight: 500;
+				    font-size: 23px;
+				    line-height: 28px;
+				    text-align: center;
+				    color: #FFFFFF;
+				    margin-bottom: 5px;
+				}
+				span{
+					font-style: normal;
+					font-weight: normal;
+					font-size: 12px;
+					line-height: 15px;
+					text-align: center;
+					color: rgba(255, 255, 255, 0.5);
+				}
+			}
+	    }
+	    .first-text{
+			    font-style: normal;
+				font-weight: normal;
+				font-size: 12px;
+				line-height: 15px;
+				text-align: center;
+				color: #FFFFFF;
+				display: flex;
+				align-items: center;
+				justify-content: center;
+				margin-left: 12px;
+				margin-top: 50px;
+			}
+		.second-text{
+			font-style: normal;
+			font-weight: normal;
+			font-size: 12px;
+			line-height: 15px;
+			text-align: center;
+			color: #FFFFFF;
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			margin-right: 20px;
+			margin-top: 50px;
+		}
+	}
+}

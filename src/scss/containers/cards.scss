@@ -1,0 +1,132 @@
+.balance_time_wrapper{
+                        background: hsla(0,0%,100%,.1);
+                        border-radius: 24px;
+                        width: 100%;
+                        text-align: center;
+                        margin: 30px 0;
+                        padding-bottom: 25px;
+                        /*width: 246px;*/
+                        // height: 317px;
+                        padding: 25px;
+                        @include respond-at-max(768px){
+                            width: 60%;
+                        }
+                        @include respond-at-max(540px){
+                            width: 100%;
+                        }
+                        h3{
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 16px;
+                            line-height: 20px;
+                            text-align: center;
+                            color: #FFFFFF;
+
+                        }
+                        img{
+                            width: 68px;
+                            height: 68px;
+                        }
+                        .time{
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 16px;
+                            line-height: 20px;
+                            text-align: center;
+                            color: #FFFFFF;
+                            margin-top: 15px;
+                        }
+                        .time-text{
+                            font-style: normal;
+                            font-weight: 500;
+                            font-size: 8px;
+                            line-height: 10px;
+                            text-align: center;
+                            color: rgba(255, 255, 255, 0.5);
+                        }
+                        .title-num{
+                            margin-top: 28px;
+                            margin-bottom: 28px;
+                            .left-sub-title{
+                                font-style: normal;
+                                font-weight: 500;
+                                font-size: 8px;
+                                line-height: 10px;
+                                text-align: left;
+                                color: rgba(255, 255, 255, 0.5);
+                                padding-bottom: 5px;
+                            }
+                            .right-num{
+                                font-style: normal;
+                                font-weight: 500;
+                                font-size: 8px;
+                                line-height: 10px;
+                                text-align: right;
+                                color: #FFFFFF;
+                                padding-bottom: 5px;
+                                
+                            }
+                        }
+                        .harvest-btn{
+                            background: #878CFF;
+                            border-radius: 30px;
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 14px;
+                            line-height: 17px;
+                            display: flex;
+                            align-items: center;
+                            text-align: center;
+                            color: #34388E;
+                            height: 40px;
+                            width: 130px;
+                            justify-content: center;
+                            margin: auto;
+                            cursor: pointer;
+                        }
+                    }
+                    .balance_condition_wrapper{
+                        background: hsla(0,0%,100%,.1);
+                        border-radius: 24px;
+                        width: 100%;
+                        text-align: center;
+                        margin: 30px 0;
+                        padding-bottom: 25px;
+                        padding: 20px;
+                        @include respond-at-max(1024px){
+                            height: 100%;
+                        }
+                        @include respond-at-max(768px){
+                            width: 60%;
+                        }
+                        @include respond-at-max(540px){
+                            width: 100%;
+                        }
+                        h3{
+                            font-style: normal;
+                            font-weight: bold;
+                            font-size: 16px;
+                            line-height: 20px;
+                            text-transform: uppercase;
+                            color: rgba(255, 255, 255, 0.5);
+                            text-align: left;
+                            margin-bottom: 20px;
+                        }
+                        .text-1{
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 10px;
+                            line-height: 12px;
+                            color: #ffffff;
+                            text-align: left;  
+                            margin-bottom: 10px 
+                        }
+                        .text-2{
+                            font-style: normal;
+                            font-weight: 400;
+                            font-size: 10px;
+                            line-height: 12px;
+                            color: #ffffff; 
+                            text-align: left;  
+                        }
+                    }
