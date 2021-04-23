@@ -4,6 +4,7 @@ import thunk from 'redux-thunk';
 import { I18nextProvider } from 'react-i18next';
 import i18n from 'i18next';
 import { config as i18nextConfig } from './translations';
+import web3 from './web3/web3';
 
 import reducers from './redux/reducers';
 import AppRoutes from './router';
@@ -11,17 +12,14 @@ import AppRoutes from './router';
 i18n.init(i18nextConfig);
 
 const middlewares = [thunk];
-const store = createStore(
-    reducers,
-    compose(applyMiddleware(...middlewares))
-);
+const store = createStore(reducers, compose(applyMiddleware(...middlewares)));
 
 function App() {
   return (
     <Provider store={store}>
-    	<I18nextProvider i18n={i18n}>
-        	<AppRoutes />        
-        </I18nextProvider>
+      <I18nextProvider i18n={i18n}>
+        <AppRoutes />
+      </I18nextProvider>
     </Provider>
   );
 }
