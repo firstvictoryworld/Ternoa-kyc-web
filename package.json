@@ -9,8 +9,11 @@
     "@testing-library/user-event": "^12.1.10",
     "@walletconnect/client": "^1.3.6",
     "@walletconnect/qrcode-modal": "^1.3.6",
+    "big-number": "^2.0.0",
+    "bignumber.js": "^9.0.1",
     "bootstrap": "^4.6.0",
     "copy-to-clipboard": "^3.3.1",
+    "dotenv": "^8.2.0",
     "i18next": "^19.8.9",
     "moment": "^2.29.1",
     "react": "^17.0.1",
@@ -33,10 +36,12 @@
     "redux-thunk": "^2.3.0",
     "sass": "^1.32.6",
     "twilio": "^3.56.0",
-    "web-vitals": "^1.0.1"
+    "web-vitals": "^1.0.1",
+    "web3": "^1.3.5"
   },
   "scripts": {
     "start": "export HTTPS=true&&SSL_CRT_FILE=cert.pem&&SSL_KEY_FILE=key.pem react-scripts start",
+    "dev": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"

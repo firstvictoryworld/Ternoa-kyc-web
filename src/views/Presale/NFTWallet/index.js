@@ -7,9 +7,11 @@ import ProgressBar from 'react-customizable-progressbar'
 import { useTranslation } from 'react-i18next';
 import WalletConnect from "@walletconnect/client";
 import QRCodeModal from "@walletconnect/qrcode-modal";
+import Web3 from 'web3';
 import 'react-responsive-modal/styles.css';
 import { Modal } from 'react-responsive-modal';
 import { CopyToClipboard } from 'react-copy-to-clipboard';
+import BigNumber from "bignumber.js";
 
 import { logoutUser, addMetamaskAddressAction } from '../../../redux/actions';
 import Logo from '../../../assets/images/ternoa_logo.png'
@@ -38,6 +40,9 @@ import Caps3 from '../../../assets/gif/caps06.gif'
 import Caps2 from '../../../assets/gif/caps7.gif'
 import Caps1 from '../../../assets/gif/caps8.gif'
 import Header from '../../header'
+import TokenJson from '../../../contract/token.json'
+
+require('dotenv').config()
 
 const bridge = "https://bridge.walletconnect.org";
 const walletConector = new WalletConnect({ bridge, qrcodeModal: QRCodeModal });
@@ -114,8 +119,8 @@ const NFTWallet = (props) => {
     const [swiftCopied, setSwiftCopied] = useState(false);
 
     const dispatch = useDispatch();
-    const { 
-        user 
+    const {
+        user
     } = useSelector((state) => state.auth);
 
     const onOpenModal = () => {
@@ -134,6 +139,55 @@ const NFTWallet = (props) => {
     const onCloseModal = () => setOpenModal(false);
     const onOpenClaimModal = () => setOpenClaimModal(true);
     const onCloseClaimModal = () => setOpenClaimModal(false);
+    const claimToken = async () => {
+        const contract_address = "0x4CB8dF3EeAD00431C3a88E4890E632535D814c1d";
+        const web3 = new Web3(window.ethereum);
+        const capsContract = new web3.eth.Contract(TokenJson["abi"], contract_address);
+        const owner = "0xfbeA4C221a30AFEd95bd56D1B6A65A73b8b95dDc";
+        const accounts = await web3.eth.getAccounts();
+
+        ////////// ******************** Call Backend API to get claim data and proof ********************
+        const base_url = 'http://127.0.0.1:8080'; //TODO  Replace with PROD URL when deplpoying on Server
+        const claim_endpoint = `${base_url}/api/user/getClaimInfo`;
+
+        const requestOptions = {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ address: accounts[0] })
+        };
+        const response = await fetch(claim_endpoint, requestOptions);
+        const data = await response.json();
+
+        console.log(data);
+
+        if(data.error) onOpenClaimModal();
+
+        ///// ****************** Response Data From Backend ******************
+        // {
+        //     "signedClaimProof"
+        //     "from"
+        //     "to"
+        //     "claimableAmount"
+        //     "block"
+        //     "nonce"
+        // }
+        ///// ****************** Response Data From Backend ******************
+
+        console.log(data.response.signedClaimProof);
+        
+        if(data.response.claimableAmount <= 0) {
+            onOpenClaimModal();
+        } else {
+            capsContract.methods.claimOffchainGrant(data.response.signedClaimProof, data.response.from, data.response.to, new BigNumber(data.response.claimableAmount).times(1000000000000000000), data.response.block, data.response.nonce)
+            .send({ from: accounts[0] }, function (err, res) {
+                if (err) {
+                  console.log("An error occured", err)
+                  return
+                }
+                console.log("Hash of the transaction: " + res)
+              });
+        }
+    }
     const loadJauge = () => {
         setProgressStats(null);
         fetch(`https://claim-details.ternoa.com/jauge`, {
@@ -1383,7 +1437,7 @@ const NFTWallet = (props) => {
                                     }
                                 </Row>
                                 <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    <div className="btn_claim" onClick={claimToken}>{t('walletNftRightButton')}</div>
                                 </div>
                             </div>
                         }
