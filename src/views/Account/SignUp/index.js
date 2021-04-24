@@ -92,15 +92,20 @@ const SignUp = (props) => {
             const headers = {
                 'Api-Key': '2tNYsfio11UnpXnHo3U2PTjzDISzRPWD',
             }
-            await fetch(`https://workflow-api.synaps.io/v2/session/init?sandbox=false&alias=${payload.email}`, {
-                method: 'POST',
+            /* changed for test*/
+            //            await fetch(`https://workflow-api.synaps.io/v2/session/init?sandbox=false&alias=${payload.email}`, {
+
+            await fetch(`https://claim-details.ternoa.com/create`, {
+              //  method: 'POST',
+              method:'GET',
                 headers: headers,
                 body: undefined,
             }).then(
                 response => response.json()
             ).then(res => {
                 // console.log(res)
-                payload.sessionkyc = res.session_id;
+               // payload.sessionkyc = "";
+                payload.sessionkyc = "xxxx-xxxxx-xxxx";
                 if (affiliate_id && affiliate_id.length > 0) {
                     payload.affiliate = affiliate_id + ''
                 }

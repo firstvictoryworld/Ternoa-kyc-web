@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from 'react'
 import { Container, Row, Col } from 'reactstrap';
-import { connect } from "react-redux";
+import { useDispatch, useSelector } from 'react-redux';
 import { NavLink, useHistory } from 'react-router-dom'
 import moment from "moment";
 import ProgressBar from 'react-customizable-progressbar'
@@ -53,18 +53,47 @@ const bankName = 'QONTO';
 const additionalInfo = '1 RUE LOEB, 64200 BIARRITZ';
 // const bankSwift =  'BNPAFRPP';
 
+// Development Data
+
+const vestingData ={
+    vesting1 : '2021-03-04T09:01:37.800Z',
+    vesting2 : '2021-03-04T09:01:37.800Z',
+    vesting3 : '2021-03-04T09:01:37.800Z',
+    vesting3 : '2021-03-04T09:01:37.800Z',
+    vesting1price: 1,
+    vesting2price: 2,
+    vesting3price: 3,
+    vesting4price: 4
+}
+
 const NFTWallet = (props) => {
     const myRef = React.useRef(null);
     const { t } = useTranslation('common');
-    const { onUpdateAccountConnected } = props;
+    const { 
+        history, 
+        // user, 
+        // onLogout,
+        // onUpdateAccountConnected 
+    } = props;
     const [chainType, setChainType] = useState('');
     const [connectedAccountAddress, setConnectedAccoutAddress] = useState('');
-    const [vesting1, setVesting1] = useState(null);
-    const [vesting2, setVesting2] = useState(null);
-    const [vesting3, setVesting3] = useState(null);
-    const [vesting4, setVesting4] = useState(null);
-    const [vesting5, setVesting5] = useState(null);
-    const [vesting6, setVesting6] = useState(null);
+
+
+    // const [vesting1, setVesting1] = useState(null);
+    // const [vesting2, setVesting2] = useState(null);
+    // const [vesting3, setVesting3] = useState(null);
+    // const [vesting4, setVesting4] = useState(null);
+    // const [vesting5, setVesting5] = useState(null);
+    // const [vesting6, setVesting6] = useState(null);
+
+
+    const [vestingAirdrop, setVestingAirdrop] = useState(null);
+    const [vestingSeed, setVestingSeed] = useState(null);
+    const [vestingCommunity, setVestingCommunity] = useState(null);
+  
+
+   
+
     const [connector, setConnector] = useState(null);
     const [isWallet, setIsWallet] = useState(false);
     const [openModal, setOpenModal] = useState(false);
@@ -83,6 +112,11 @@ const NFTWallet = (props) => {
     const [bankNameCopied, setBankNameCopied] = useState(false);
     const [addInfoCopied, setAddInfoCopied] = useState(false);
     const [swiftCopied, setSwiftCopied] = useState(false);
+
+    const dispatch = useDispatch();
+    const { 
+        user 
+    } = useSelector((state) => state.auth);
 
     const onOpenModal = () => {
         setOpenModal(true)
@@ -122,30 +156,114 @@ const NFTWallet = (props) => {
             })
             .catch(err => err);
     }
-    const loadVestingBlock = (address) => {
-        setVesting1(null);
-        fetch(`https://claim-details.ternoa.com/invest/?address=${address}`, {
-            method: 'GET',
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                setVesting1(data);
-                myEuros = myEuros + data.valueEur;
-                setMyPocket(myEuros);
-                let tokens = parseFloat(data.tokens)
-                myCaps = myCaps + tokens
-                setMyPocketCaps(myCaps);
-            })
-            .catch(err => err);
-    }
-    const loadVestingBlock2 = (address) => {
-        setVesting2(null);
+
+    // Old 6 Commentted
+    // const loadVestingBlock = (address) => {
+    //     setVesting1(null);
+    //     fetch(`https://claim-details.ternoa.com/invest/?address=${address}`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting1(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+    // const loadVestingBlock2 = (address) => {
+    //     setVesting2(null);
+    //     fetch(`https://claim-details.ternoa.com/airdrop/?address=${address}`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting2(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+    // const loadVestingBlock3 = (address) => {
+    //     setVesting3(null);
+    //     fetch(`https://claim-details.ternoa.com/investors2eth/?address=${address}`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting3(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+    // const loadVestingBlock4 = (address) => {
+    //     setVesting4(null);
+    //     fetch(`https://claim-details.ternoa.com/investors2bsc/?address=${address}`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting4(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+    // const loadVestingBlock5 = (address) => {
+    //     setVesting5(null);
+    //     fetch(`https://claim-details.ternoa.com/investors2wire/?address=${address}`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting5(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+    // const loadVestingBlock6 = (address) => {
+    //     setVesting6(null);
+    //     fetch(`https://investors-ternoa.s3.eu-west-3.amazonaws.com/error.json`, {
+    //         method: 'GET',
+    //     })
+    //         .then(resp => resp.json())
+    //         .then(data => {
+    //             setVesting6(data);
+    //             myEuros = myEuros + data.valueEur;
+    //             setMyPocket(myEuros);
+    //             let tokens = parseFloat(data.tokens)
+    //             myCaps = myCaps + tokens
+    //             setMyPocketCaps(myCaps);
+    //         })
+    //         .catch(err => err);
+    // }
+
+
+    const loadAirdropVestingBlock = (address) => {
+        setVestingAirdrop(null);
         fetch(`https://claim-details.ternoa.com/airdrop/?address=${address}`, {
             method: 'GET',
         })
             .then(resp => resp.json())
             .then(data => {
-                setVesting2(data);
+                setVestingAirdrop(data);
                 myEuros = myEuros + data.valueEur;
                 setMyPocket(myEuros);
                 let tokens = parseFloat(data.tokens)
@@ -154,14 +272,15 @@ const NFTWallet = (props) => {
             })
             .catch(err => err);
     }
-    const loadVestingBlock3 = (address) => {
-        setVesting3(null);
-        fetch(`https://claim-details.ternoa.com/investors2eth/?address=${address}`, {
+
+    const loadSeedVestingBlock = (address) => {
+        setVestingSeed(null);
+        fetch(`https://claim-details.ternoa.com/seed/?address=${address}`, {
             method: 'GET',
         })
             .then(resp => resp.json())
             .then(data => {
-                setVesting3(data);
+                setVestingSeed(data);
                 myEuros = myEuros + data.valueEur;
                 setMyPocket(myEuros);
                 let tokens = parseFloat(data.tokens)
@@ -170,14 +289,15 @@ const NFTWallet = (props) => {
             })
             .catch(err => err);
     }
-    const loadVestingBlock4 = (address) => {
-        setVesting4(null);
-        fetch(`https://claim-details.ternoa.com/investors2bsc/?address=${address}`, {
+    
+    const loadCommunityVestingBlock = (address) => {
+        setVestingCommunity(null);
+        fetch(`https://claim-details.ternoa.com/community/?address=${address}`, {
             method: 'GET',
         })
             .then(resp => resp.json())
             .then(data => {
-                setVesting4(data);
+                setVestingCommunity(data);
                 myEuros = myEuros + data.valueEur;
                 setMyPocket(myEuros);
                 let tokens = parseFloat(data.tokens)
@@ -186,38 +306,11 @@ const NFTWallet = (props) => {
             })
             .catch(err => err);
     }
-    const loadVestingBlock5 = (address) => {
-        setVesting5(null);
-        fetch(`https://claim-details.ternoa.com/investors2wire/?address=${address}`, {
-            method: 'GET',
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                setVesting5(data);
-                myEuros = myEuros + data.valueEur;
-                setMyPocket(myEuros);
-                let tokens = parseFloat(data.tokens)
-                myCaps = myCaps + tokens
-                setMyPocketCaps(myCaps);
-            })
-            .catch(err => err);
-    }
-    const loadVestingBlock6 = (address) => {
-        setVesting6(null);
-        fetch(`https://investors-ternoa.s3.eu-west-3.amazonaws.com/error.json`, {
-            method: 'GET',
-        })
-            .then(resp => resp.json())
-            .then(data => {
-                setVesting6(data);
-                myEuros = myEuros + data.valueEur;
-                setMyPocket(myEuros);
-                let tokens = parseFloat(data.tokens)
-                myCaps = myCaps + tokens
-                setMyPocketCaps(myCaps);
-            })
-            .catch(err => err);
-    }
+
+
+
+   
+
     const subscribeToEvents = (walletConector) => {
         if (!walletConector) {
             return;
@@ -298,16 +391,66 @@ const NFTWallet = (props) => {
         setMyPocket(0);
         setMyPocketCaps(0);
     }
+
+    // const initAffiliatedEthBscAdderss = () => {
+    //     if(user && user.affiliate) {
+    //       if(user.affiliate.length > 0) {
+    //         switch(user.affiliate) {
+    //           case '7156':
+    //             affiliateEthAddress = '0x901C70774bD3Ecd888cbCe35810C37325c73fF49';
+    //             affiliateBscAddress = '0x901C70774bD3Ecd888cbCe35810C37325c73fF49';
+    //             break;
+    //           case '6683':
+    //             affiliateEthAddress = '0x4f96d3AeFdB6A01299E81F4DE5b7Fa19bc99616f';
+    //             affiliateBscAddress = '0x4f96d3AeFdB6A01299E81F4DE5b7Fa19bc99616f';
+    //             break;
+    //           case '4384':
+    //             affiliateEthAddress = '0xC687748ef54cd459Ec1f2fb031C0b3feA87CF32A';
+    //             affiliateBscAddress = '0xC687748ef54cd459Ec1f2fb031C0b3feA87CF32A';
+    //             break;
+    //           case '4384':
+    //             affiliateEthAddress = '0x186f507C329772dbDc68c3d93636660693F56BAE';
+    //             affiliateBscAddress = '0x186f507C329772dbDc68c3d93636660693F56BAE';
+    //             break;
+    //           default:
+    //             // code block
+    //         }
+    //       }
+    //     }
+    // } 
+
     const onAccountAddressUpdated = async () => {
         if (connectedAccountAddress) {
             resetMyPockets();
-            onUpdateAccountConnected({ address: connectedAccountAddress })
-            await loadVestingBlock(connectedAccountAddress)
-            await loadVestingBlock2(connectedAccountAddress)
-            await loadVestingBlock3(connectedAccountAddress)
-            await loadVestingBlock4(connectedAccountAddress)
-            await loadVestingBlock5(connectedAccountAddress)
-            await loadVestingBlock6(connectedAccountAddress)
+            // onUpdateAccountConnected({ address: connectedAccountAddress })
+            dispatch(addMetamaskAddressAction({ address: connectedAccountAddress }))
+
+          
+            await loadAirdropVestingBlock(connectedAccountAddress)
+            await loadSeedVestingBlock(connectedAccountAddress)
+            await loadCommunityVestingBlock(connectedAccountAddress)
+
+            // Development Data
+            // await loadAirdropVestingBlock('0x24915582009f9049d1a6647f0fbd9f420ae01fe1')
+            // await loadSeedVestingBlock('0x24915582009f9049d1a6647f0fbd9f420ae01fe1')
+            // await loadCommunityVestingBlock('0x24915582009f9049d1a6647f0fbd9f420ae01fe1')
+
+             
+            // Old 6 Vesting Commented
+            // await loadVestingBlock(connectedAccountAddress)
+            // await loadVestingBlock2(connectedAccountAddress)
+            // await loadVestingBlock3(connectedAccountAddress)
+            // await loadVestingBlock4(connectedAccountAddress)
+            // await loadVestingBlock5(connectedAccountAddress)
+            // await loadVestingBlock6(connectedAccountAddress)
+
+            // Development Data
+            // setVesting1(vestingData);
+            // setVesting2(vestingData);
+            // setVesting3(vestingData);
+
+           
+          
         }
     }
 
@@ -321,6 +464,7 @@ const NFTWallet = (props) => {
         loadInvestorsDeal();
         loadNftWalletDatas();
         initEventsMetamask();
+        // initAffiliatedEthBscAdderss()
     }, []);
 
     useEffect(() => {
@@ -341,7 +485,8 @@ const NFTWallet = (props) => {
         if (isWallet && connector && connector.connected) {
             connector.killSession();
         }
-        onLogout(history);
+        // onLogout(history);
+        dispatch(logoutUser(history))
     }
 
     const closeIconTemp = (
@@ -350,7 +495,6 @@ const NFTWallet = (props) => {
         </div>
     );
 
-    const { history, user, onLogout } = props;
     return (
         <div className="nft_wallet_wrapper">
             <Modal open={openClaimModal} onClose={onCloseClaimModal} center>
@@ -801,199 +945,384 @@ const NFTWallet = (props) => {
                                 <div className="num_caps">{myPocketCaps.toFixed(1)} CAPS</div>
                             </div>
                         }
-                        {
-                            vesting2 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Airdrop : <span className="num_caps">{vesting2.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting2.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting2.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting2.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting2 && vesting2.vesting4) &&
-                                                <div className="date">{moment(vesting2.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting2.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting2.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting2.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting2 && vesting2.vesting4) &&
-                                                <div className="caps_num">{vesting2.vesting4price.toFixed(1)} CAPS</div>
-                                            }
-                                        </div>
-                                    </div>
-                                </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
-                                </div>
-                            </div>
-                        }
-                        {
-                            vesting1 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Presale 1 : <span className="num_caps">{vesting1.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting1.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting1.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting1.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting1 && vesting1.vesting4) &&
-                                                <div className="date">{moment(vesting1.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting1.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting1.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting1.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting1 && vesting1.vesting4) &&
-                                                <div className="caps_num">{vesting1.vesting4price.toFixed(1)} CAPS</div>
-                                            }
+                        {/*
+                            {
+                                vesting2 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Airdrop : <span className="num_caps">{vesting2.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting2.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting2.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting2.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting2 && vesting2.vesting4) &&
+                                                    <div className="date">{moment(vesting2.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting2.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting2.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting2.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting2 && vesting2.vesting4) &&
+                                                    <div className="caps_num">{vesting2.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
-                                </div>
-                            </div>
-                        }
-                        {
-                            vesting3 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Presale 2 ETH : <span className="num_caps">{vesting3.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting3.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting3.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting3.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting3 && vesting3.vesting4) &&
-                                                <div className="date">{moment(vesting3.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting3.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting3.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting3.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting3 && vesting3.vesting4) &&
-                                                <div className="caps_num">{vesting3.vesting4price.toFixed(1)} CAPS</div>
-                                            }
-                                        </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
                                     </div>
                                 </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
-                                </div>
-                            </div>
-                        }
-                        {
-                            vesting4 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Presale 2 BSC : <span className="num_caps">{vesting4.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting4.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting4.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting4.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting4 && vesting4.vesting4) &&
-                                                <div className="date">{moment(vesting4.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting4.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting4.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting4.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting4 && vesting4.vesting4) &&
-                                                <div className="caps_num">{vesting4.vesting4price.toFixed(1)} CAPS</div>
-                                            }
+                            }
+                            {
+                                vesting1 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Presale 1 : <span className="num_caps">{vesting1.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting1.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting1.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting1.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting1 && vesting1.vesting4) &&
+                                                    <div className="date">{moment(vesting1.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting1.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting1.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting1.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting1 && vesting1.vesting4) &&
+                                                    <div className="caps_num">{vesting1.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
                                         </div>
                                     </div>
-                                </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
-                                </div>
-                            </div>
-                        }
-                        {
-                            vesting5 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Presale 2 Wire Transfer : <span className="num_caps">{vesting5.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting5.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting5.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting5.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting5 && vesting5.vesting4) &&
-                                                <div className="date">{moment(vesting5.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting5.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting5.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting5.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting5 && vesting5.vesting4) &&
-                                                <div className="caps_num">{vesting5.vesting4price.toFixed(1)} CAPS</div>
-                                            }
-                                        </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
                                     </div>
                                 </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                            }
+                            {
+                                vesting3 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Presale 2 ETH : <span className="num_caps">{vesting3.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting3.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting3.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting3.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting3 && vesting3.vesting4) &&
+                                                    <div className="date">{moment(vesting3.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting3.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting3.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting3.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting3 && vesting3.vesting4) &&
+                                                    <div className="caps_num">{vesting3.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                            {
+                                vesting4 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Presale 2 BSC : <span className="num_caps">{vesting4.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting4.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting4.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting4.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting4 && vesting4.vesting4) &&
+                                                    <div className="date">{moment(vesting4.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting4.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting4.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting4.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting4 && vesting4.vesting4) &&
+                                                    <div className="caps_num">{vesting4.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
+                                </div>
+                            }
+                            {
+                                vesting5 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Presale 2 Wire Transfer : <span className="num_caps">{vesting5.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting5.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting5.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting5.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting5 && vesting5.vesting4) &&
+                                                    <div className="date">{moment(vesting5.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting5.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting5.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting5.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting5 && vesting5.vesting4) &&
+                                                    <div className="caps_num">{vesting5.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
+                                </div>
+                            }
+
+                            {
+                                vesting6 &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Others : <span className="num_caps">{vesting6.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vesting6.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting6.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vesting6.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vesting6 && vesting6.vesting4) &&
+                                                    <div className="date">{moment(vesting6.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vesting6.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting6.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vesting6.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vesting6 && vesting6.vesting4) &&
+                                                    <div className="caps_num">{vesting6.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
+                                </div>
+                            }
+
+                        */}
 
                         {
-                            vesting6 &&
-                            <div className="balance_wrapper">
-                                <div className="left-heading-card">Others : <span className="num_caps">{vesting6.tokens} CAPS</span></div>
-                                <div className="lock_period_wrapper">
-                                    <div className="lock_period">{t('walletNftRightText2')}</div>
-                                    <div className="date_lock_wrapper">
-                                        <div className="date_wrapper">
-                                            <div className="date">{moment(vesting6.vesting1).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting6.vesting2).format('DD/MM/YYYY')}</div>
-                                            <div className="date">{moment(vesting6.vesting3).format('DD/MM/YYYY')}</div>
-                                            {
-                                                (vesting6 && vesting6.vesting4) &&
-                                                <div className="date">{moment(vesting6.vesting4).format('DD/MM/YYYY')}</div>
-                                            }
-                                        </div>
-                                        <div className="num_caps_wrapper">
-                                            <div className="caps_num">{vesting6.vesting1price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting6.vesting2price.toFixed(1)} CAPS</div>
-                                            <div className="caps_num">{vesting6.vesting3price.toFixed(1)} CAPS</div>
-                                            {
-                                                (vesting6 && vesting6.vesting4) &&
-                                                <div className="caps_num">{vesting6.vesting4price.toFixed(1)} CAPS</div>
-                                            }
+                                vestingAirdrop &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Airdrop : <span className="num_caps">{vestingAirdrop.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vestingAirdrop.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingAirdrop.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingAirdrop.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vestingAirdrop && vestingAirdrop.vesting4) &&
+                                                    <div className="date">{moment(vestingAirdrop.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                                { (vestingAirdrop && vestingAirdrop.vesting5) && <div className="date">{moment(vestingAirdrop.vesting5).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting6) && <div className="date">{moment(vestingAirdrop.vesting6).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting7) && <div className="date">{moment(vestingAirdrop.vesting7).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting8) && <div className="date">{moment(vestingAirdrop.vesting8).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting9) && <div className="date">{moment(vestingAirdrop.vesting9).format('DD/MM/YYYY')}</div> }
+                                                
+                                                { (vestingAirdrop && vestingAirdrop.vesting10) && <div className="date">{moment(vestingAirdrop.vesting10).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting11) && <div className="date">{moment(vestingAirdrop.vesting11).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting12) && <div className="date">{moment(vestingAirdrop.vesting12).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting13) && <div className="date">{moment(vestingAirdrop.vesting13).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting14) && <div className="date">{moment(vestingAirdrop.vesting14).format('DD/MM/YYYY')}</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting15) && <div className="date">{moment(vestingAirdrop.vesting15).format('DD/MM/YYYY')}</div> }
+
+                                                
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vestingAirdrop.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingAirdrop.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingAirdrop.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vestingAirdrop && vestingAirdrop.vesting4) &&
+                                                    <div className="caps_num">{vestingAirdrop.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                                { (vestingAirdrop && vestingAirdrop.vesting5price) && <div className="caps_num">{vestingAirdrop.vesting5price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting6price) && <div className="caps_num">{vestingAirdrop.vesting6price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting7price) && <div className="caps_num">{vestingAirdrop.vesting7price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting8price) && <div className="caps_num">{vestingAirdrop.vesting8price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting9price) && <div className="caps_num">{vestingAirdrop.vesting9price.toFixed(1)} CAPS</div> }
+
+                                                { (vestingAirdrop && vestingAirdrop.vesting10price) && <div className="caps_num">{vestingAirdrop.vesting10price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting11price) && <div className="caps_num">{vestingAirdrop.vesting11price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting12price) && <div className="caps_num">{vestingAirdrop.vesting12price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting13price) && <div className="caps_num">{vestingAirdrop.vesting13price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting14price) && <div className="caps_num">{vestingAirdrop.vesting14price.toFixed(1)} CAPS</div> }
+                                                { (vestingAirdrop && vestingAirdrop.vesting15price) && <div className="caps_num">{vestingAirdrop.vesting15price.toFixed(1)} CAPS</div> }
+
+
+                                            </div>
                                         </div>
                                     </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
                                 </div>
-                                <div className="button_wrapper">
-                                    <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                            }
+                            {
+                                vestingSeed &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Seed : <span className="num_caps">{vestingSeed.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vestingSeed.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingSeed.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingSeed.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vestingSeed && vestingSeed.vesting4) &&
+                                                    <div className="date">{moment(vestingSeed.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                                { (vestingSeed && vestingSeed.vesting5) && <div className="date">{moment(vestingSeed.vesting5).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting6) && <div className="date">{moment(vestingSeed.vesting6).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting7) && <div className="date">{moment(vestingSeed.vesting7).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting8) && <div className="date">{moment(vestingSeed.vesting8).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting9) && <div className="date">{moment(vestingSeed.vesting9).format('DD/MM/YYYY')}</div> }
+
+                                                { (vestingSeed && vestingSeed.vesting10) && <div className="date">{moment(vestingSeed.vesting10).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting11) && <div className="date">{moment(vestingSeed.vesting11).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting12) && <div className="date">{moment(vestingSeed.vesting12).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting13) && <div className="date">{moment(vestingSeed.vesting13).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting14) && <div className="date">{moment(vestingSeed.vesting14).format('DD/MM/YYYY')}</div> }
+                                                { (vestingSeed && vestingSeed.vesting15) && <div className="date">{moment(vestingSeed.vesting15).format('DD/MM/YYYY')}</div> }
+
+
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vestingSeed.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingSeed.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingSeed.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vestingSeed && vestingSeed.vesting4) &&
+                                                    <div className="caps_num">{vestingSeed.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                                { (vestingSeed && vestingSeed.vesting5price) && <div className="caps_num">{vestingSeed.vesting5price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting6price) && <div className="caps_num">{vestingSeed.vesting6price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting7price) && <div className="caps_num">{vestingSeed.vesting7price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting8price) && <div className="caps_num">{vestingSeed.vesting8price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting9price) && <div className="caps_num">{vestingSeed.vesting9price.toFixed(1)} CAPS</div> }
+
+                                                { (vestingSeed && vestingSeed.vesting10price) && <div className="caps_num">{vestingSeed.vesting10price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting11price) && <div className="caps_num">{vestingSeed.vesting11price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting12price) && <div className="caps_num">{vestingSeed.vesting12price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting13price) && <div className="caps_num">{vestingSeed.vesting13price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting14price) && <div className="caps_num">{vestingSeed.vesting14price.toFixed(1)} CAPS</div> }
+                                                { (vestingSeed && vestingSeed.vesting15price) && <div className="caps_num">{vestingSeed.vesting15price.toFixed(1)} CAPS</div> }
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
                                 </div>
-                            </div>
-                        }
+                            }
+                            {
+                                vestingCommunity &&
+                                <div className="balance_wrapper">
+                                    <div className="left-heading-card">Community : <span className="num_caps">{vestingCommunity.tokens} CAPS</span></div>
+                                    <div className="lock_period_wrapper">
+                                        <div className="lock_period">{t('walletNftRightText2')}</div>
+                                        <div className="date_lock_wrapper">
+                                            <div className="date_wrapper">
+                                                <div className="date">{moment(vestingCommunity.vesting1).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingCommunity.vesting2).format('DD/MM/YYYY')}</div>
+                                                <div className="date">{moment(vestingCommunity.vesting3).format('DD/MM/YYYY')}</div>
+                                                {
+                                                    (vestingCommunity && vestingCommunity.vesting4) &&
+                                                    <div className="date">{moment(vestingCommunity.vesting4).format('DD/MM/YYYY')}</div>
+                                                }
+                                                { (vestingCommunity && vestingCommunity.vesting5) && <div className="date">{moment(vestingCommunity.vesting5).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting6) && <div className="date">{moment(vestingCommunity.vesting6).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting7) && <div className="date">{moment(vestingCommunity.vesting7).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting8) && <div className="date">{moment(vestingCommunity.vesting8).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting9) && <div className="date">{moment(vestingCommunity.vesting9).format('DD/MM/YYYY')}</div> }
+
+                                                { (vestingCommunity && vestingCommunity.vesting10) && <div className="date">{moment(vestingCommunity.vesting10).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting11) && <div className="date">{moment(vestingCommunity.vesting11).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting12) && <div className="date">{moment(vestingCommunity.vesting12).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting13) && <div className="date">{moment(vestingCommunity.vesting13).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting14) && <div className="date">{moment(vestingCommunity.vesting14).format('DD/MM/YYYY')}</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting15) && <div className="date">{moment(vestingCommunity.vesting15).format('DD/MM/YYYY')}</div> }
+
+                                                
+                                            </div>
+                                            <div className="num_caps_wrapper">
+                                                <div className="caps_num">{vestingCommunity.vesting1price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingCommunity.vesting2price.toFixed(1)} CAPS</div>
+                                                <div className="caps_num">{vestingCommunity.vesting3price.toFixed(1)} CAPS</div>
+                                                {
+                                                    (vestingCommunity && vestingCommunity.vesting4) &&
+                                                    <div className="caps_num">{vestingCommunity.vesting4price.toFixed(1)} CAPS</div>
+                                                }
+                                                { (vestingCommunity && vestingCommunity.vesting5price) && <div className="caps_num">{vestingCommunity.vesting5price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting6price) && <div className="caps_num">{vestingCommunity.vesting6price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting7price) && <div className="caps_num">{vestingCommunity.vesting7price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting8price) && <div className="caps_num">{vestingCommunity.vesting8price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting9price) && <div className="caps_num">{vestingCommunity.vesting9price.toFixed(1)} CAPS</div> }
+
+                                                { (vestingCommunity && vestingCommunity.vesting10price) && <div className="caps_num">{vestingCommunity.vesting10price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting11price) && <div className="caps_num">{vestingCommunity.vesting11price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting12price) && <div className="caps_num">{vestingCommunity.vesting12price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting13price) && <div className="caps_num">{vestingCommunity.vesting13price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting14price) && <div className="caps_num">{vestingCommunity.vesting14price.toFixed(1)} CAPS</div> }
+                                                { (vestingCommunity && vestingCommunity.vesting15price) && <div className="caps_num">{vestingCommunity.vesting15price.toFixed(1)} CAPS</div> }
+
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div className="button_wrapper">
+                                        <div className="btn_claim" onClick={onOpenClaimModal}>{t('walletNftRightButton')}</div>
+                                    </div>
+                                </div>
+                            }
+
 
                         {
                             /* YOUR NFTS */
@@ -1102,21 +1431,4 @@ const NFTWallet = (props) => {
     );
 }
 
-const mapStateToProps = ({ auth }) => {
-    const { user } = auth;
-    return {
-        user
-    }
-}
-
-const mapDispatchToProps = (dispatch, ownProps) => {
-    return {
-        onLogout: (history) => dispatch(logoutUser(history)),
-        onUpdateAccountConnected: (payload) => dispatch(addMetamaskAddressAction(payload))
-    }
-}
-
-export default connect(
-    mapStateToProps,
-    mapDispatchToProps
-)(NFTWallet)
+export default NFTWallet;
